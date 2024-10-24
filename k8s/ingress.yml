@@ -20,7 +20,7 @@ spec:
               service:
                 name: smartcontract-service
                 port:   
-                  number: 8545 #experimental
+                  number: 8545 
           - path: /
             pathType: Prefix
             backend:
