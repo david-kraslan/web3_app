@@ -64,6 +64,7 @@ jobs:
           VALIDATE_DOCKERFILE_HADOLINT: true
           VALIDATE_HTML_PRETTIER: true
           VALIDATE_CSS_PRETTIER: true
+          SAVE_SUPER_LINTER_OUTPUT: true
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
 
   webapp-build:
