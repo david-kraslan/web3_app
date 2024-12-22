@@ -21,7 +21,8 @@ FROM node:18.20.4-alpine AS run
 WORKDIR /app
 
 # Create the non-root user and group, install production dependencies and install 'serve'
-RUN addgroup -S app_admins && adduser -S app_admin -G app_admins \
+RUN addgroup -S app_admins \
+    && adduser -S app_admin -G app_admins \
     && npm install -g serve
 
 # Copy the build output from the build stage
