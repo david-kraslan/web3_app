@@ -1,15 +1,16 @@
 # Stage 1: BUILD
 FROM node:18.20.4-alpine AS build
 
+# Set the working directory
 WORKDIR /app
 
-# Copy the necessary files for npm install
+# Copy package.json and package-lock.json to install dependencies
 COPY package*.json ./
 
 # Install dependencies
 RUN npm ci
 
-# Copy the rest of the application code
+# Copy the entire project into the container (excluding files in .dockerignore)
 COPY . .
 
 # Build the app
@@ -18,6 +19,7 @@ RUN npm run build
 # Stage 2: RUN
 FROM node:18.20.4-alpine AS run
 
+# Set the working directory
 WORKDIR /app
 
 # Create the non-root user and group, install production dependencies and install 'serve'
@@ -34,10 +36,10 @@ RUN chown -R app_admin:app_admins /app
 # Switch to the non-root user
 USER app_admin
 
-# Expose the necessary port
+# Expose port 3000
 EXPOSE 3000
 
-# Serve the built application
+# Serve the application
 CMD ["serve", "-s", "dist"]
 
 
